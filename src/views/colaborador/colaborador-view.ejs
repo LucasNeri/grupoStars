@@ -1,0 +1,91 @@
+<%- include('../includes/head')%>
+<%- include('../includes/nav')%>
+
+<div class="container">
+  <!-- Botão voltar -->
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="btn btn-outline-secondary" onclick="history.go(-1);" aria-label="Previous">
+        <span aria-hidden="true">&laquo; retornar</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <!-- Visualização do colaborador -->
+    <div class="col-lg-8 my-3">
+      <%- include('../includes/messages') %>
+      <h1 class="text-center"><%= colaborador.nome %></h1>
+      <p class="text-center lead">Os dados de <%= colaborador.nome %> estão abaixo:</p>
+      </br></br>
+
+      <table class="table my-3">
+        <tr>
+          <td><strong>Código:</strong></td>
+          <td><%= colaborador.codigo %></td>
+        </tr>
+        <tr>
+          <td><strong>CPF:</strong></td>
+          <td><%= colaborador.cpf %></td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td><%= colaborador.email %></td>
+        </tr>
+        <tr>
+          <td><strong>Telefone:</strong></td>
+          <td><%= colaborador.telefone %></td>
+        </tr>
+        <tr>
+          <td><strong>Endereço:</strong></td>
+          <td><%= colaborador.endereco %></td>
+        </tr>
+        <tr>
+          <td><strong>Empresa:</strong></td>
+          <td><%= empresa.nome %></td>
+        </tr>        
+      </table>
+
+      <div class="btn-group btn-group-sm" role="group" aria-label="...">
+        <a href="/colaborador/index/<%= colaborador._id %>" class="btn btn-outline-primary">
+          Editar Colaborador
+        </a>
+        <a href="/empresa/view/<%= empresa._id %>" class="btn btn-outline-secondary">
+          Visualizar <%= empresa.nome %>
+        </a>
+
+        <!-- Botão Modal -->
+        <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<%= colaborador._id %>">
+          Apagar
+        </a>
+
+        <!-- Modal -->
+        <div style="text-align: left" class="modal fade" id="exampleModal<%= colaborador._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Deseja realmente <strong>apagar <%= colaborador.nome %></strong>?
+              </div>
+              <div class="modal-footer">
+                <a href="/colaborador/delete/<%= colaborador._id %>" class="btn btn-danger">Apagar</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('../includes/footer')%>

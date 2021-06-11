@@ -1,0 +1,64 @@
+<%- include('../includes/head')%>
+<%- include('../includes/nav')%>
+
+<div class="container">
+  <!-- Botão voltar -->
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="btn btn-outline-secondary" onclick="history.go(-1);" aria-label="Previous">
+        <span aria-hidden="true">&laquo; retornar</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <!-- Seleção de empresas para editar os colaboradores -->
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Colaboradores</h1>
+
+      <%- include('../includes/messages') %>
+      
+      <!-- Listagem das empresas -->
+      <% if(empresas.length > 0) { %>
+      <p class="text-center lead">Selecione a empresa que você deseja cadastrar, excluir ou editar um ou mais colaboradores:</p>
+      </br></br> 
+
+      <div class="responsive-table">
+        <table class="table my-3">
+          <% empresas.forEach(empresa => { %>
+          <tr>
+            <th><%= empresa.nome %></th>
+            <td style="text-align: center"><%= empresa.cnpj %></td>
+            <td style="text-align: right">
+              <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                <a href="/colaborador/selecao-colaborador/<%= empresa._id %>" class="btn btn-outline-primary">Selecionar</a>
+              </div>
+            </td>
+          </tr>
+          <% }); %>
+      </table>
+      </div>
+
+      <!-- Caso não possua empresas cadastradas -->
+      <% } else { %>
+        <p class="text-center lead text-muted">Ainda não possuem empresas cadastradas.</p>
+
+        <!-- Botão para cadastrar nova empresa -->
+        <form action="/empresa/index" method="POST">
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <a class="btn btn-primary btn-sm" href="/empresa/index" role="button">
+              Cadastrar Nova Empresa
+            </a>
+          </div>
+        </form>
+      <% } %>
+    
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('../includes/footer')%>

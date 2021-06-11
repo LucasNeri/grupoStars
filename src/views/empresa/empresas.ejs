@@ -1,0 +1,94 @@
+<%- include('../includes/head')%>
+<%- include('../includes/nav')%>
+
+    <div class="container">
+      <!-- Botão voltar -->
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="btn btn-outline-secondary" onclick="history.go(-1);" aria-label="Previous">
+            <span aria-hidden="true">&laquo; retornar</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 my-3">
+          <%- include('../includes/messages') %>
+          <h1 class="text-center">Empresas</h1>
+
+          <!-- Se tiverem empresas cadastradas -->
+          <% if(empresas.length > 0) { %>
+          <p class="text-center lead">Suas empresas cadastradas estão abaixo:</p>
+          </br></br>   
+            
+          <div class="responsive-table">
+            <table class="table my-3">
+
+              <!-- Listagem das empresas -->
+              <% empresas.forEach(empresa => { %>
+              <tr>
+                <th><%= empresa.nome %></th>
+                <td style="text-align: center"><%= empresa.cnpj %></td>
+                
+                <!-- Botões das ações exigidas -->
+                <td style="text-align: right">
+                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                    <a href="/empresa/view/<%= empresa._id %>" class="btn btn-outline-primary">Visualizar</a>
+                    <a href="/empresa/index/<%= empresa._id %>" class="btn btn-outline-secondary">Editar</a>
+
+                    <!-- Botão Modal -->
+                    <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<%= empresa._id %>">
+                      Apagar
+                    </a>
+
+                    <!-- Modal -->
+                    <div style="text-align: left" class="modal fade" id="exampleModal<%= empresa._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Deseja realmente <strong>apagar <%= empresa.nome %></strong>?
+                            </br></br>
+                            Se você apagar <%= empresa.nome %> <strong>perderá todos os colaboradores vinculados a ela</strong>.
+                          </div>
+                          <div class="modal-footer">
+                            <a href="/empresa/delete/<%= empresa._id %>" class="btn btn-danger">Apagar mesmo assim</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </td>
+              </tr>
+              <% }); %>
+            </table>
+            
+            <!-- Quando não existir empresas cadastradas -->
+            <% } else { %>
+              <p class="text-center lead text-muted">Ainda não possuem empresas cadastradas.</p>
+              </br></br>  
+            <% } %>
+
+            <!-- Botão para cadastrar nova empresa -->
+            <form action="/empresa/index" method="POST">
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <a class="btn btn-primary btn-sm" href="/empresa/index" role="button">
+                  Cadastrar Nova Empresa
+                </a>
+              </div>
+            </form>
+            </br></br>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+<%- include('../includes/footer')%>

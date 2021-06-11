@@ -1,0 +1,124 @@
+<%- include('../includes/head')%>
+<%- include('../includes/nav')%>
+
+<div class="container">
+  <!-- Botão voltar -->
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="btn btn-outline-secondary" onclick="history.go(-1);" aria-label="Previous">
+        <span aria-hidden="true">&laquo; retornar</span>
+      </a>
+    </li>
+  </ul>
+    
+  <div class="row">
+    <div class="col-lg-2"></div>
+    
+
+    <!-- Visualização da Empresa -->
+    <div class="col-lg-8 my-3">
+      <%- include('../includes/messages') %>
+      <h1 class="text-center"><%= empresa.nome %></h1>
+
+      <p class="text-center lead">Os dados da <%= empresa.nome %> estão abaixo:</p>
+      </br></br>
+
+      <table class="table my-3">
+        <tr>
+          <td><strong>Código:</strong></td>
+          <td><%= empresa.codigo %></td>
+        </tr>
+        <tr>
+          <td><strong>CNPJ:</strong></td>
+          <td><%= empresa.cnpj %></td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td><%= empresa.email %></td>
+        </tr>
+        <tr>
+          <td><strong>Telefone:</strong></td>
+          <td><%= empresa.telefone %></td>
+        </tr>
+        <tr>
+          <td><strong>Endereço:</strong></td>
+          <td><%= empresa.endereco %></td>
+        </tr>
+      </table>
+
+      <div class="btn-group btn-group-sm " role="group" aria-label="...">
+        <a href="/empresa/index/<%= empresa._id %>" class="btn btn-outline-secondary">
+          Editar <%= empresa.nome %>
+       </a>
+      </div>
+      </br></br></br>
+
+      <!-- Visualização dos colaboradores vinculados -->
+      <h4 class="text-center">Colaboradores:</h4>
+
+      <!-- Se existirem colaboradores vinculados -->
+      <% if(colaboradoresFiltrados.length > 0) { %>
+
+      <div class="responsive-table">
+        <table class="table my-3">
+          <% colaboradoresFiltrados.forEach(colaborador => { %>
+          <tr>
+            <th><%= colaborador.nome %></th>
+            <td><%= colaborador.cpf %></td>
+            <td style="text-align: right">
+              <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                <a href="/colaborador/view/<%= colaborador._id %>" class="btn btn-outline-primary">Visualizar</a>
+                <a href="/colaborador/index/<%= colaborador._id %>" class="btn btn-outline-secondary">Editar</a>
+
+                <!-- Botão Modal -->
+                <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<%= colaborador._id %>">
+                  Apagar
+                </a>
+              </div>
+
+              <!-- Modal -->
+              <div style="text-align: left" class="modal fade" id="exampleModal<%= colaborador._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Deseja realmente <strong>apagar <%= colaborador.nome %></strong>?
+                    </div>
+                    <div class="modal-footer">
+                      <a href="/colaborador/delete/<%= colaborador._id %>" class="btn btn-danger">Apagar</a>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </td>
+          </tr>
+          <% }); %>
+        </table>
+
+        <!-- Caso não existam colaboradores vinculados -->
+        <% } else { %>
+          <p class="text-center lead">Ainda não existem colaboradores cadastrados.</p>
+        <% } %>
+      </div>
+
+        <!-- Botão para cadastrar novo Colaborador -->
+        <form action="/colaborador/cadastro" method="POST">
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <a class="btn btn-primary btn-sm" href="/colaborador/cadastro/<%= empresa._id %>" role="button">
+              Cadastrar Novo Colaborador
+            </a>
+          </div>
+        </form>
+    </div>
+    </br>
+    <div class="col-lg-2"></div>
+
+  </div>
+</div>
+
+<%- include('../includes/footer')%>

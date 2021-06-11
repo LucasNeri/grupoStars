@@ -1,0 +1,78 @@
+<%- include('../includes/head')%>
+<%- include('../includes/nav')%>
+
+<div class="container">
+  <!-- Botão voltar -->
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="btn btn-outline-secondary" onclick="history.go(-1);" aria-label="Previous">
+        <span aria-hidden="true">&laquo; retornar</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <!-- Formulário para cadastrar empresa -->
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Empresa</h1>
+      <p class="text-center lead">Cadastre ou edite sua empresa abaixo.</p>
+
+      <%- include('../includes/messages') %>
+
+      <!-- Condição para que seja um novo cadastro ou editar uma empresa existente -->
+      <% if(empresa._id) { %>
+      <form action="/empresa/edit/<%= empresa._id %>" method="POST">
+      <% } else { %>
+      <form action="/empresa/register" method="POST">
+      <% } %>
+
+        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+
+        <div class="mb-3">
+          <label>Código</label>
+          <input value="<%= empresa.codigo %>" type="tel" class="form-control" name="codigo">
+        </div>
+
+        <div class="mb-3">
+          <label>CNPJ</label>
+          <input value="<%= empresa.cnpj %>" type="tel" class="form-control" name="cnpj" placeholder="ex: 00.0000.000/0000-00" data-mask="00.000.000/0000-00">
+        </div>
+
+        <div class="mb-3">
+          <label>Nome</label>
+          <input value="<%= empresa.nome %>" type="text" class="form-control" name="nome" placeholder="ex: Google">
+        </div>
+
+        <div class="mb-3">
+          <label>Email</label>
+          <input value="<%= empresa.email %>" type="email" class="form-control" name="email" placeholder="ex: google@gmail.com">
+        </div>
+
+        <div class="mb-3">
+          <label>Telefone</label>
+          <input value="<%= empresa.telefone %>" type="tel" class="form-control" name="telefone" placeholder="ex: (00) 00000-0000" data-mask="(00) 00000-0000">
+        </div>
+        
+        <div class="mb-3">
+          <label>Endereço</label>
+          <input value="<%= empresa.endereco %>" type="text" class="form-control" placeholder="ex: Rua Exemplo, 0" name="endereco">
+        </div>
+
+        <!-- Botões Condicionados -->
+        <% if(empresa._id) { %>
+        <button type="submit" class="btn btn-primary">Editar</button>
+        <% } else { %>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <% } %>
+
+      </form>
+
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('../includes/footer')%>

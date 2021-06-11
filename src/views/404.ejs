@@ -1,0 +1,26 @@
+<%- include('includes/head')%>
+<%- include('includes/nav')%>
+
+<div class="container">
+  <!-- Botão voltar -->
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="btn btn-outline-secondary" onclick="history.go(-1);" aria-label="Previous">
+        <span aria-hidden="true">&laquo; retornar</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-5">
+      <h1 class="display-1 text-center">Erro 404!</h1>
+      <p class="text-center lead">A página que você procura não existe.</p>
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer')%>

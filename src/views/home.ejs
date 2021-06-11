@@ -1,0 +1,48 @@
+<!-- includes estão na pasta includes -->
+<%- include('includes/head')%>
+<%- include('includes/nav')%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Olá <%= user.nome %></h1>
+      <p class="text-center lead">
+        Aqui você pode cadastrar empresas e seus colaboradores.
+      </p>
+      
+      <%- include('includes/messages'); %>
+
+      </br></br>
+
+      <!-- Card -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cadastre uma empresa</h5>
+              <p class="card-text">Espaço para cadastrar, editar ou excluir uma empresa.</p>
+              </br>
+              <a href="/empresa/empresas" class="btn btn-primary">Empresas</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cadastre um colabarador</h5>
+              <p class="card-text">Espaço para cadastrar, editar ou excluir um colaborador.</p>
+              <a href="/colaborador/empresas" class="btn btn-primary">Colaboradores</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer')%>
