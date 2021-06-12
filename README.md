@@ -23,7 +23,7 @@ Tentei deixar de forma mais completa, deixando com mais páginas, podendo reduzi
 
 Fiz com que caso você apague a empresa irá apagar também os colaboradores para que não ocupem espaço no banco de dados levando em conta que sem a empresa você não teria acesso aos colaboradores antes vinculados a ela.
 
-Não deixei uma opção "apagar todas as empresas" pois acho isso muito perigoso, uma vez que isso feito não apagaria também todos os colaboradores vinculados a elas.
+Não deixei uma opção "apagar todas as empresas" pois acho isso muito perigoso, uma vez que isso feito apagaria também todos os colaboradores cadastrados.
 
 
 
