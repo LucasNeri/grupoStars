@@ -78,6 +78,8 @@ Empresa.prototype.edit = async function(id) {
 };
 
 // Métodos estáticos
+
+// Buscar empresa pelo ID
 Empresa.buscaPorId = async function(id) {
     if(typeof id !== 'string') return;
     const empresa = await EmpresaModel.findById(id);
@@ -96,6 +98,20 @@ Empresa.delete = async function(id) {
     if(typeof id !== 'string') return;
     const empresa = await EmpresaModel.findOneAndDelete({_id: id});
     return empresa;
+};
+
+// Procura se existe uma empresa com o mesmo nome
+Empresa.filtraEmpresasPorNome = async function(empresas, nome) {
+    const empresacomnome = []
+    function filtraEmpresa(empresas, empresacomnome) {
+        empresas.forEach(empresa => {
+            if (empresa.nome.toUpperCase() == nome.toUpperCase()) {
+                empresacomnome.push(empresa)
+            };
+        });
+    };
+    filtraEmpresa(empresas, empresacomnome)
+    return empresacomnome;
 };
 
 // Procura se existe uma empresa com o mesmo cnpj

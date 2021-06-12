@@ -32,6 +32,7 @@ exports.register = async (req, res) => {
     const vereditocnpj = await Empresa.filtraEmpresasPorCnpj(empresas, req.body.cnpj);
     const vereditoemail = await Empresa.filtraEmpresasPorEmail(empresas, req.body.email);
     const vereditocodigo = await Empresa.filtraEmpresasPorCodigo(empresas, req.body.codigo);
+    const vereditonome = await Empresa.filtraEmpresasPorNome(empresas, req.body.nome);
 
     if (vereditocnpj.length > 0) {
         req.flash('errors', `O CNPJ informado já foi cadastrado por ${vereditocnpj[0].nome}!`);
@@ -43,6 +44,10 @@ exports.register = async (req, res) => {
         return;
     } else if (vereditocodigo.length > 0) {
         req.flash('errors', `O Código informado já foi cadastrado por ${vereditocodigo[0].nome}!`);
+        req.session.save(() => res.redirect('/empresa/index'));
+        return;
+    } else if (vereditonome.length > 0) {
+        req.flash('errors', `O Nome informado já foi cadastrado por ${vereditonome[0].nome}!`);
         req.session.save(() => res.redirect('/empresa/index'));
         return;
     }
@@ -85,6 +90,7 @@ exports.edit = async function(req, res) {
     const vereditocnpj = await Empresa.filtraEmpresasPorCnpj(empresas, req.body.cnpj);
     const vereditoemail = await Empresa.filtraEmpresasPorEmail(empresas, req.body.email);
     const vereditocodigo = await Empresa.filtraEmpresasPorCodigo(empresas, req.body.codigo);
+    const vereditonome = await Empresa.filtraEmpresasPorNome(empresas, req.body.nome);
     
     const propria = await Empresa.buscaPorId(req.params.id)
 
@@ -107,6 +113,14 @@ exports.edit = async function(req, res) {
     if (vereditocodigo.length > 0) {
         if (vereditocodigo[0].codigo != propria.codigo) {
             req.flash('errors', `O Codigo informado já foi cadastrado por ${vereditocodigo[0].nome}!`);
+            req.session.save(() => res.redirect(`/empresa/index/${req.params.id}`));
+            return;
+        }
+    }
+
+    if (vereditonome.length > 0) {
+        if (vereditonome[0].nome != propria.nome) {
+            req.flash('errors', `O Nome informado já foi cadastrado por ${vereditonome[0].nome}!`);
             req.session.save(() => res.redirect(`/empresa/index/${req.params.id}`));
             return;
         }
