@@ -17,7 +17,7 @@ Mas com isso ficaria mais dificil o acesso ao teste o que acho que não seria pr
 Levei em conta que não podem existir duas empresas com o mesmo: nome, código, cnpj ou email.
 Para os colaboradores não podem existir dois colaboradores com o mesmo: código, cnpj ou email.
 
-Outra coisa que coloquei é que não é possível cadasatrar o mesmo colaborador em duas empresas distintas.
+Outra coisa que coloquei é que não é possível cadastrar o mesmo colaborador em duas empresas distintas.
 
 Tentei deixar de forma mais completa, deixando com mais páginas, podendo reduzir o número de páginas e informações de acordo com o gosto da equipe.
 
