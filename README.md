@@ -4,7 +4,7 @@ Teste Prático
 
 # Observações
 
-O projeto consiste no cadastro de empresas e seus colaboradores com os campos sugeridos no teste.
+O projeto consiste no cadastro de empresas e seus colaboradores.
 
 No projeto me imaginei dentro do Grupo Stars, e que a equipe me deixou responsável pelo projeto para a nossa empresa.
 
